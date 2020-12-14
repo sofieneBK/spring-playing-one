@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+
+    <!-- Configuration d'un bean dont l'identifiant est "scanner". Il est créé à partir de la classe "java.util.Scanner" -->
+    <bean id="scanner" class="java.util.Scanner">
+        <constructor-arg>
+            <!-- Référencement du champ static "System.in" -->
+            <util:constant static-field="java.lang.System.in"/>
+        </constructor-arg>
+    </bean>
+
+    <!-- bean plat service -->
+    <bean id="platService" class="dev.service.PlatServiceVersion2">
+        <constructor-arg name="dao" ref="dao" />
+    </bean>
+
+    <!-- bean menu -->
+    <bean id="menu" class="dev.ihm.Menu">
+        <constructor-arg name="scanner" ref="scanner" />
+        <constructor-arg name="service" ref="platService" />
+    </bean>
+
+</beans>
